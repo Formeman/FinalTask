@@ -44,5 +44,7 @@ public class MainPage extends BasePage {
 
         builder.moveToElement(woman).perform();
         womanTShirts.click();
-        }
+    }
+
+    public void goToRegistrationPage (){login.click();}
 }

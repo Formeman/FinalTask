@@ -1,7 +1,9 @@
 package pages;
 
+import browser.Browser;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -23,11 +25,17 @@ public class SearchPage extends BasePage{
     @FindBy(css = "div[class*='button-container'] a")
     WebElement checkout;
 
-
+    @FindBy(css = "div[class*='product-container']")
+    WebElement product;
 
     public String getProductName(){return productName.get(0).getText();}
 
-    public void addProduct(){addButton.get(0).click();}
+    public void addProduct(){
+        Actions builder = new Actions(((Browser)driver).getDriver());
+
+        builder.moveToElement(product).perform();
+        addButton.get(0).click();
+    }
 
     public void clictToCheckout(){checkout.click();}
 }

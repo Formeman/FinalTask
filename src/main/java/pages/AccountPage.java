@@ -5,6 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.List;
+
 public class AccountPage extends BasePage {
 
     public AccountPage(WebDriver driver){
@@ -15,20 +17,16 @@ public class AccountPage extends BasePage {
     @FindBy(className = "icon-list-ol")
     WebElement historyButton;
 
-    @FindBy(css = "tr[class*='first_item'] span[class*='footable-toggle']")
-    WebElement plusButton;
+    @FindBy(css = "tbody a[class*=' button-small']")
+    List<WebElement> detailsButton;
 
-    @FindBy(css = "tr[class*='footable-row-detail'] a[class*='btn']")
-    WebElement detailsButton;
 
     @FindBy(css = "div[id*='order-detail-content'] td[class*='bold']")
     WebElement productLabel;
 
     public void clickToHistoryButton(){historyButton.click();}
 
-    public void clickToPlusButton(){plusButton.click();}
-
-    public void clickToDetailsButton(){detailsButton.click();}
+    public void clickToDetailsButton(){detailsButton.get(0).click();}
 
     public String getProductLabel(){return productLabel.getText();}
 }

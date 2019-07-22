@@ -21,7 +21,7 @@ public class BasketPage extends BasePage{
     @FindBy(className = "alert alert-warning")
     WebElement alert;
 
-    @FindBy(css = "a[class*='button btn']")
+    @FindBy(css = "[class*='button btn btn-default']")
     WebElement checkoutButton;
 
     @FindBy(name = "cgv")
@@ -42,11 +42,11 @@ public class BasketPage extends BasePage{
     @FindBy(name = "SubmitLogin")
     WebElement loginButton;
 
-    public boolean isProductIsDisplayed(){return productName.isDisplayed();}
+    public String isProductIsDisplayed(){return productName.getText();}
 
     public void clickToDeleteButton(){deletebutton.click();}
 
-    public boolean isAlertIsDisplayed(){ return alert.isDisplayed();}
+    public boolean isAlertIsDisplayed(){return alert.isDisplayed();}
 
     public void clickToCheckoutButton(){checkoutButton.click();}
 
@@ -59,8 +59,9 @@ public class BasketPage extends BasePage{
     public void login(String email, String password){
         emailInput.sendKeys(email);
         passwordInput.sendKeys(password);
-        loginButton.click();
     }
+
+    public void clickOnLoginButton(){loginButton.click();}
 
     public String getProductName(){return productName.getText();}
 }

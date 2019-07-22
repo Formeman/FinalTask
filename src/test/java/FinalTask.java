@@ -1,9 +1,5 @@
 import driverSingleton.WebDriverSingleton;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -19,6 +15,7 @@ public class FinalTask {
     SearchPage searchPage;
     BasketPage basketPage;
     AccountPage accountPage;
+    RegistrationPage registrationPage;
 
     @BeforeMethod(alwaysRun = true)
     public void beforeMethod(){
@@ -37,6 +34,7 @@ public class FinalTask {
         searchPage = new SearchPage(driver);
         basketPage = new BasketPage(driver);
         accountPage = new AccountPage(driver);
+        registrationPage = new RegistrationPage(driver);
     }
 
     @AfterMethod(alwaysRun = true)
@@ -79,35 +77,16 @@ public class FinalTask {
         Assert.assertEquals(contactUs.getErrorMessage(),error,"Error message should be visible");
     }
 
-//    @Test
-//    public void registration(){
-    ////Randomizer
-//        @FindBy(id = "login")
-//        WebElement loginR;
-////Registration
-//        @FindBy(id = "email_create")
-//        WebElement emailCreate;
-//        @FindBy(id = "SubmitCreate")
-//        WebElement SubmitCreate;
+    @Test
+    public void registration(){
+        mainPage.goToRegistrationPage();
+        registrationPage.inputRandomEmail();
+        registrationPage.clickOnCreateButton();
+        registrationPage.inputRegistrationDate();
+        registrationPage.clickOnRegistrationButton();
 
-////        String currentWindow = driver.getWindowHandle();
-////        driver.findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL +"t");
-////        driver.get("http://www.yopmail.com/ru/email-generator.php");
-////        String loginName =driver.findElement(By.id("login")).getText();
-//
-//        String selectLinkOpeninNewTab = Keys.chord(Keys.CONTROL,Keys.RETURN);
-//        driver.findElement(By.linkText("http://www.yopmail.com/ru/email-generator.php")).sendKeys(selectLinkOpeninNewTab);
-//        String loginName =driver.findElement(By.id("login")).getText();
-//
-//        driver.close();
-
-//
-////        login.click();
-////        emailCreate.sendKeys(loginName);
-////        SubmitCreate.click();
-//
-//        Assert.assertEquals(driver.getCurrentUrl(),"account-creation");
-//    }
+        Assert.assertTrue(registrationPage.isMyAccountActive(),"My account should be displayed");
+    }
 
     @Test
     public void findBlouse(){
@@ -119,16 +98,18 @@ public class FinalTask {
     }
 
     @Test
-    public void addProductInBasket(){
+    public void addProductInBasket() throws InterruptedException {
         String product = "Blouse";
 
         mainPage.searchRequest(product);
         searchPage.addProduct();
         searchPage.clictToCheckout();
 
-        Assert.assertTrue(basketPage.isProductIsDisplayed(),"Product should be displayed");
+        Assert.assertEquals(basketPage.isProductIsDisplayed(),product,"Product should be displayed");
 
         basketPage.clickToDeleteButton();
+
+        Thread.sleep(2000);
 
         Assert.assertTrue(basketPage.isAlertIsDisplayed(),"Alert should be displayed");
     }
@@ -155,6 +136,7 @@ public class FinalTask {
 
         basketPage.clickToCheckoutButton();
         basketPage.login(email,password);
+        basketPage.clickOnLoginButton();
         basketPage.clickToCheckoutButton();
         basketPage.clickTosgvButton();
         basketPage.clickToCheckoutButton();
@@ -163,7 +145,6 @@ public class FinalTask {
         basketPage.goToAccountButton();
 
         accountPage.clickToHistoryButton();
-        accountPage.clickToPlusButton();
         accountPage.clickToDetailsButton();
 
         Assert.assertTrue(accountPage.getProductLabel().contains(productName),"Product names should be identical");

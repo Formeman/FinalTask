@@ -9,7 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class MainPage extends BasePage {
 
-    public MainPage(WebDriver driver) {
+    public MainPage() {
         super();
         PageFactory.initElements(driver, this);
     }
@@ -32,19 +32,23 @@ public class MainPage extends BasePage {
     @FindBy(css = "ul[class*='submenu-container '] a[title*='T-shirts']")
     WebElement womanTShirts;
 
-    public void searchRequest (String request){
+    public void searchRequest(String request) {
         search.sendKeys(request);
         searchButton.click();
     }
 
-    public void goToContactUs(){contactUs.click();}
+    public void goToContactUs() {
+        contactUs.click();
+    }
 
-    public void goToWomanTShirts(){
-        Actions builder = new Actions(((Browser)driver).getDriver());
+    public void goToWomanTShirts() {
+        Actions builder = new Actions(((Browser) driver).getDriver());
 
         builder.moveToElement(woman).perform();
         womanTShirts.click();
     }
 
-    public void goToRegistrationPage (){login.click();}
+    public void goToRegistrationPage() {
+        login.click();
+    }
 }

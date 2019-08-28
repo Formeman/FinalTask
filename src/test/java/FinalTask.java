@@ -18,7 +18,7 @@ public class FinalTask {
     RegistrationPage registrationPage;
 
     @BeforeMethod(alwaysRun = true)
-    public void beforeMethod(){
+    public void beforeMethod() {
         System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
         driver = WebDriverSingleton.create();
 
@@ -29,17 +29,17 @@ public class FinalTask {
 
         driver.get("http://automationpractice.com/index.php");
 
-        mainPage = new MainPage(driver);
-        contactUs = new ContactUs(driver);
-        searchPage = new SearchPage(driver);
-        basketPage = new BasketPage(driver);
-        accountPage = new AccountPage(driver);
-        registrationPage = new RegistrationPage(driver);
+        mainPage = new MainPage();
+        contactUs = new ContactUs();
+        searchPage = new SearchPage();
+        basketPage = new BasketPage();
+        accountPage = new AccountPage();
+        registrationPage = new RegistrationPage();
     }
 
     @AfterMethod(alwaysRun = true)
-    public void finish(){
-    WebDriverSingleton.kill();
+    public void finish() {
+        WebDriverSingleton.kill();
     }
 
     @Test
@@ -57,11 +57,11 @@ public class FinalTask {
         contactUs.messageInput(message);
         contactUs.clickToSendButton();
 
-        Assert.assertTrue(contactUs.alertSuccessIsDisplayed(),"Successful alert should be displayed");
+        Assert.assertTrue(contactUs.alertSuccessIsDisplayed(), "Successful alert should be displayed");
     }
 
     @Test
-    public void negativeContact(){
+    public void negativeContact() {
         String email = "email@mail.ru";
         String order = "12345678";
         String file = "C:/Users/qwerty/Desktop/Автоматизация/FinalTask/Text.txt";
@@ -74,48 +74,46 @@ public class FinalTask {
         contactUs.fileInput(file);
         contactUs.clickToSendButton();
 
-        Assert.assertEquals(contactUs.getErrorMessage(),error,"Error message should be visible");
+        Assert.assertEquals(contactUs.getErrorMessage(), error, "Error message should be visible");
     }
 
     @Test
-    public void registration(){
+    public void registration() {
         mainPage.goToRegistrationPage();
         registrationPage.inputRandomEmail();
         registrationPage.clickOnCreateButton();
         registrationPage.inputRegistrationDate();
         registrationPage.clickOnRegistrationButton();
 
-        Assert.assertTrue(registrationPage.isMyAccountActive(),"My account should be displayed");
+        Assert.assertTrue(registrationPage.isMyAccountActive(), "My account should be displayed");
     }
 
     @Test
-    public void findBlouse(){
+    public void findBlouse() {
         String product = "Blouse";
 
         mainPage.searchRequest(product);
 
-        Assert.assertEquals(searchPage.getProductName(),product,"Product should be displayed");
+        Assert.assertEquals(searchPage.getProductName(), product, "Product should be displayed");
     }
 
     @Test
-    public void addProductInBasket() throws InterruptedException {
+    public void addProductInBasket() {
         String product = "Blouse";
 
         mainPage.searchRequest(product);
         searchPage.addProduct();
         searchPage.clictToCheckout();
 
-        Assert.assertEquals(basketPage.isProductIsDisplayed(),product,"Product should be displayed");
+        Assert.assertEquals(basketPage.isProductIsDisplayed(), product, "Product should be displayed");
 
         basketPage.clickToDeleteButton();
 
-        Thread.sleep(2000);
-
-        Assert.assertTrue(basketPage.isAlertIsDisplayed(),"Alert should be displayed");
+        Assert.assertTrue(basketPage.isAlertIsDisplayed(), "Alert should be displayed");
     }
 
     @Test
-    public void catalogTest(){
+    public void catalogTest() {
         String product = "T-shirts";
 
         mainPage.goToWomanTShirts();
@@ -124,7 +122,7 @@ public class FinalTask {
     }
 
     @Test
-    public void buyingTest(){
+    public void buyingTest() {
         String email = "test1@mail.ru";
         String password = "12345";
 
@@ -135,7 +133,7 @@ public class FinalTask {
         String productName = basketPage.getProductName();
 
         basketPage.clickToCheckoutButton();
-        basketPage.login(email,password);
+        basketPage.login(email, password);
         basketPage.clickOnLoginButton();
         basketPage.clickToCheckoutButton();
         basketPage.clickTosgvButton();
@@ -147,6 +145,6 @@ public class FinalTask {
         accountPage.clickToHistoryButton();
         accountPage.clickToDetailsButton();
 
-        Assert.assertTrue(accountPage.getProductLabel().contains(productName),"Product names should be identical");
+        Assert.assertTrue(accountPage.getProductLabel().contains(productName), "Product names should be identical");
     }
 }

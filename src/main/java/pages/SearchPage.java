@@ -9,9 +9,9 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-public class SearchPage extends BasePage{
+public class SearchPage extends BasePage {
 
-    public SearchPage(WebDriver driver) {
+    public SearchPage() {
         super();
         PageFactory.initElements(driver, this);
     }
@@ -28,14 +28,18 @@ public class SearchPage extends BasePage{
     @FindBy(css = "div[class*='product-container']")
     WebElement product;
 
-    public String getProductName(){return productName.get(0).getText();}
+    public String getProductName() {
+        return productName.get(0).getText();
+    }
 
-    public void addProduct(){
-        Actions builder = new Actions(((Browser)driver).getDriver());
+    public void addProduct() {
+        Actions builder = new Actions(((Browser) driver).getDriver());
 
         builder.moveToElement(product).perform();
         addButton.get(0).click();
     }
 
-    public void clictToCheckout(){checkout.click();}
+    public void clictToCheckout() {
+        checkout.click();
+    }
 }

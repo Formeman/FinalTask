@@ -8,10 +8,10 @@ import java.util.UUID;
 public class BasePage {
     protected WebDriver driver = WebDriverSingleton.create();
 
-    public String getRandomEmail() {
+    String getRandomEmail() {
         UUID uuid = UUID.randomUUID();
 
-        return uuid.toString()+"@gmail.com";
+        return uuid.toString() + "@gmail.com";
     }
 }
 

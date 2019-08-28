@@ -9,13 +9,13 @@ import pages.RegistrationPage;
 import java.util.UUID;
 public class My {
 
-    @Test(alwaysRun = true)
-    public void beforeMethod() throws InterruptedException {
-        //System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
-        WebDriver driver = new ChromeDriver();
-        RegistrationPage registrationPage = new RegistrationPage(driver);
-
-    }
+//    @Test(alwaysRun = true)
+//    public void beforeMethod() throws InterruptedException {
+//        //System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
+//        WebDriver driver = new ChromeDriver();
+//        RegistrationPage registrationPage = new RegistrationPage(driver);
+//
+//    }
 
     @Test
     public void demo(){

@@ -8,7 +8,7 @@ import org.openqa.selenium.support.ui.Select;
 
 public class RegistrationPage extends BasePage {
 
-    public RegistrationPage(WebDriver driver) {
+    public RegistrationPage() {
         super();
         PageFactory.initElements(driver, this);
     }
@@ -50,29 +50,45 @@ public class RegistrationPage extends BasePage {
     @FindBy(id = "my-account")
     WebElement myAccount;
 
-    public void inputRandomEmail(){
+    public void inputRandomEmail() {
         String email = getRandomEmail();
         emailCreate.sendKeys(email);
     }
 
-    public void clickOnCreateButton(){createButton.click();}
+    public void clickOnCreateButton() {
+        createButton.click();
+    }
 
-    public void inputFirstName(String text){firstName.sendKeys(text);}
+    public void inputFirstName(String text) {
+        firstName.sendKeys(text);
+    }
 
-    public void inputLastName(String text){lastName.sendKeys(text);}
+    public void inputLastName(String text) {
+        lastName.sendKeys(text);
+    }
 
-    public void inputPassword(String text){password.sendKeys(text);}
+    public void inputPassword(String text) {
+        password.sendKeys(text);
+    }
 
-    public void inputCity(String text){city.sendKeys(text);}
+    public void inputCity(String text) {
+        city.sendKeys(text);
+    }
 
-    public void inputAddress(String text){address.sendKeys(text);}
+    public void inputAddress(String text) {
+        address.sendKeys(text);
+    }
 
-    public void inputPostCode(String text){postCode.sendKeys(text);}
+    public void inputPostCode(String text) {
+        postCode.sendKeys(text);
+    }
 
-    public void inputPhone(String text){phone.sendKeys(text);}
+    public void inputPhone(String text) {
+        phone.sendKeys(text);
+    }
 
-    public void inputRegistrationDate(){
-        String text= "test";
+    public void inputRegistrationDate() {
+        String text = "test";
         String zipCode = "00000";
 
         inputFirstName(text);
@@ -86,12 +102,16 @@ public class RegistrationPage extends BasePage {
         choiceStateSelect();
     }
 
-    public void choiceStateSelect(){
+    public void choiceStateSelect() {
         Select select = new Select(state);
         select.selectByValue("1");
     }
 
-    public boolean isMyAccountActive(){return myAccount.isDisplayed();}
+    public boolean isMyAccountActive() {
+        return myAccount.isDisplayed();
+    }
 
-    public void clickOnRegistrationButton(){registrationButton.click();}
+    public void clickOnRegistrationButton() {
+        registrationButton.click();
+    }
 }

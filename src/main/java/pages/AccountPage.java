@@ -9,9 +9,9 @@ import java.util.List;
 
 public class AccountPage extends BasePage {
 
-    public AccountPage(WebDriver driver){
+    public AccountPage() {
         super();
-        PageFactory.initElements(this.driver, this);
+        PageFactory.initElements(driver, this);
     }
 
     @FindBy(className = "icon-list-ol")
@@ -24,9 +24,15 @@ public class AccountPage extends BasePage {
     @FindBy(css = "div[id*='order-detail-content'] td[class*='bold']")
     WebElement productLabel;
 
-    public void clickToHistoryButton(){historyButton.click();}
+    public void clickToHistoryButton() {
+        historyButton.click();
+    }
 
-    public void clickToDetailsButton(){detailsButton.get(0).click();}
+    public void clickToDetailsButton() {
+        detailsButton.get(0).click();
+    }
 
-    public String getProductLabel(){return productLabel.getText();}
+    public String getProductLabel() {
+        return productLabel.getText();
+    }
 }

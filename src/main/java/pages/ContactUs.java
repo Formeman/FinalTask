@@ -8,7 +8,7 @@ import org.openqa.selenium.support.ui.Select;
 
 public class ContactUs extends BasePage {
 
-    public ContactUs(WebDriver driver) {
+    public ContactUs() {
         super();
         PageFactory.initElements(driver, this);
     }
@@ -37,23 +37,37 @@ public class ContactUs extends BasePage {
     @FindBy(css = "div[class*='alert alert-danger'] ol")
     WebElement errorMessage;
 
-    public void chooseContact(){
+    public void chooseContact() {
         Select select = new Select(idContact);
         select.selectByValue("1");
     }
 
-    public void inputEmail(String emailValue){ email.sendKeys(emailValue);}
+    public void inputEmail(String emailValue) {
+        email.sendKeys(emailValue);
+    }
 
-    public void orderInput(String orderValue){ order.sendKeys(orderValue);}
+    public void orderInput(String orderValue) {
+        order.sendKeys(orderValue);
+    }
 
-    public void fileInput(String fileLocation){file.sendKeys(fileLocation);}
+    public void fileInput(String fileLocation) {
+        file.sendKeys(fileLocation);
+    }
 
-    public void messageInput(String messageValue){message.sendKeys(messageValue);}
+    public void messageInput(String messageValue) {
+        message.sendKeys(messageValue);
+    }
 
-    public boolean alertSuccessIsDisplayed(){return alertSuccess.isDisplayed();}
+    public boolean alertSuccessIsDisplayed() {
+        return alertSuccess.isDisplayed();
+    }
 
-    public void clickToSendButton(){sendButton.click();}
+    public void clickToSendButton() {
+        sendButton.click();
+    }
 
-    public String getErrorMessage(){return errorMessage.getText();}
+    public String getErrorMessage() {
+        return errorMessage.getText();
+    }
 
 }
